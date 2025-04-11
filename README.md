@@ -8,8 +8,8 @@ Please note that I am by no means a developer, just an idiot on the internet wit
 
 It probably would have been faster for me to just do this manually instead of try and script it but I knew others like me probably wanted this too. I couldn't find anything simple that would do what I wanted. I hope this works for you.
 
-
-# Get your Plex XML Data
+# Steps
+## 1. Get your Plex XML Data
 First create a folder that we will be using for now on. I used C:\temp
 
 We need to know the library IDs for all libraries you'd like to export. <ins>I only tested this on movie libraries.</ins> Open CMD and run the following. Be sure to replace with your IP and Plex Token.
@@ -29,7 +29,7 @@ Next we can run the following command in CMD to pull all metadata for all items 
 You will now have a file named metadata.xml in your C:\temp folder. You can review this now to make sure everything looks good. 
 
 
-# Optional: Convert XML to List of Collections
+## Optional: Convert XML to List of Collections
 This was the original goal before I decided to take this a step further. This will simply pull a list of collections from the Plex metadata.xml file and export it as a .txt. You will need python installed on your PC.
 
 Save the PlexCollections.py script to your C:\temp and run the following in CMD.
@@ -39,7 +39,7 @@ Save the PlexCollections.py script to your C:\temp and run the following in CMD.
 From here you could use this list to manually create the collections in Jellyfin. 
 
 
-# Optional: Convert XML to List of Collections with Movies that are in each Collection. 
+## Optional: Convert XML to List of Collections with Movies that are in each Collection. 
 Again, this was another in between step that seems like it could be useful for someone. This will pull a list of collections and the movies that belong to each collection from the Plex metadata.xml file and export it as a .txt. You will need python installed on your PC.
 
 Save the PlexMovieswithCollections.py script to your C:\temp and run the following in CMD.
@@ -49,7 +49,7 @@ Save the PlexMovieswithCollections.py script to your C:\temp and run the followi
 Again you could use this list to manually create the collections in Jellyfin. 
 
 
-# Convert XML to List of Movies with Relevant Data
+## 2. Convert XML to List of Movies with Relevant Data
 This script will take the metadata.xml and export a .txt list of movies with their Title, Sort Title, Original Title, Added At Date, Last Viewed At Date, View Count, Collections and File Path as applicable. Again this step is a bit repetitive as you could likely go straight from the xml to .NFO files but I liked to use this as a check to make sure everything looks good. I would also recommend doing a trial run by editing this file and having only one movie in the list to test the next step. 
 
 Save the PlexXMLPull.py script to your C:\temp and run the following in CMD.
@@ -59,7 +59,7 @@ Save the PlexXMLPull.py script to your C:\temp and run the following in CMD.
 You should now have a file named PlexXMLPull.txt with a list of all your movies and their data. 
 
 
-# Convert Movie List and Data to .NFO Files and Store them in their Respective Folders. 
+## 3. Convert Movie List and Data to .NFO Files and Store them in their Respective Folders. 
 This script will take the PlexXMLPull.txt file and convert the data to individual .NFO files and store them in the Path listed in the PlexXMLPull.txt. I would recommend editing your PlexXMLPull.txt to only have one movie to test before running against all movies. Also depending on where your movies are stored and how your are running Plex/Jellyfin you may need to edit the file paths. For me I run Plex/Jellyfin in docker and they see the movie path as /data/movies but in reality on my Windows machine this is Z:/Media/Movies I had to do a find and replace on /data/movies to replace it to Z:/Media/Movies I didn't want to hardcode this as everyone's path is different. 
 
 Note: you may get a few "Directory does not exist" errors for folder names with special characters like Alien<sup>3</sup> or Joker: Folie à Deux. Check the output in CMD, I just fixed these manually myself within Jellyfin.
@@ -73,7 +73,7 @@ You should now have a MOVIENAME.NFO file in every folder directory. In Jellyfin,
 After this initial bulk "upload" I would suggest going into settings and selecting Manage Library for each Library and under Metadata Savers section check Nfo. This will create a new .nfo file called movie.nfo for each Movie. Now from this point on any changes you make Jellyfin will keep those new movie.nfo files updated.
 
 
-# Repeat For All Other Needed Libraries
+## 4. Repeat For All Other Needed Libraries
 You will need to go back to the beginning and use the library ID for the other libraries you want. <ins>Again, this was never tested with TV Shows.</ins> You will then get a new metadata.xml file and run your python scripts again.
 
 # Troubleshooting
