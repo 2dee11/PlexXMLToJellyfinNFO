@@ -20,7 +20,7 @@ We need to know the library IDs for all libraries you'd like to export. <ins>I o
 
 Now you can open up the libraries.xml file and see the libraries and their numbers, if you only have one movie library its typically ID 1. Look for a snippet like below.
 
-`<Location id="1" path="/data/Movies"/>`
+`key="1"`
 
 Next we can run the following command in CMD to pull all metadata for all items in the selected library by ID. Be sure to replace with your IP and Plex Token also replace the number after sections/ with the library ID you'd like to pull metadata for. <ins>Again, I only tested this on movie libraries.</ins>
 
