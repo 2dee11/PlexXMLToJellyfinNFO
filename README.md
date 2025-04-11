@@ -70,6 +70,8 @@ Save the JellyfinNFOCreator.py script to your C:\temp and run the following in C
 
 You should now have a MOVIENAME.NFO file in every folder directory. In Jellyfin, if you scan your libraries and select replace all metadata it should use the .NFO files and your movies should be just as they were in Plex. I will admit that Collections didn't work great for me and I still had to do a decent amount of manual cleanup. I believe you also still need to have the TMDb Box Sets Plugin installed to use any collections in Jellyfin, or at least get any metadata for them. 
 
+After this initial bulk "upload" I would suggest going into settings and selecting Manage Library for each Library and under Metadata Savers section check Nfo. This will create a new .nfo file called movie.nfo for each Movie. Now from this point on any changes you make Jellyfin will keep those new movie.nfo files updated.
+
 
 # Repeat For All Other Needed Libraries
 You will need to go back to the beginning and use the library ID for the other libraries you want. <ins>Again, this was never tested with TV Shows.</ins> You will then get a new metadata.xml file and run your python scripts again.
