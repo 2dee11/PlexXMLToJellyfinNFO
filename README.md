@@ -12,7 +12,7 @@ It probably would have been faster for me to just do this manually instead of tr
 ## 1. Get your Plex XML Data
 First create a folder that we will be using for now on. I used C:\temp
 
-We need to know the library IDs for all libraries you'd like to export. <ins>I only tested this on movie libraries.</ins> Open CMD and run the following. Be sure to replace with your IP and Plex Token.
+We need to know the library IDs for all libraries you'd like to export. Open CMD and run the following. Be sure to replace with your IP and Plex Token.
 
 `cd c:\temp`
 
@@ -22,7 +22,7 @@ Now you can open up the libraries.xml file and see the libraries and their numbe
 
 `key="1"`
 
-Next we can run the following command in CMD to pull all metadata for all items in the selected library by ID. Be sure to replace with your IP and Plex Token also replace the number after sections/ with the library ID you'd like to pull metadata for. <ins>Again, I only tested this on movie libraries.</ins>
+Next we can run the following command in CMD to pull all metadata for all items in the selected library by ID. Be sure to replace with your IP and Plex Token also replace the number after sections/ with the library ID you'd like to pull metadata for.
 
 `curl -o metadata.xml "http://YOURPLEXIPANDPORT/library/sections/1/all?X-Plex-Token=YOURPLEXTOKEN`
 
@@ -50,7 +50,7 @@ Again you could use this list to manually create the collections in Jellyfin.
 
 
 ## 2. Convert XML to List of Movies with Relevant Data
-This script will take the metadata.xml and export a .txt list of movies with their Title, Sort Title, Original Title, Added At Date, Last Viewed At Date, View Count, Collections and File Path as applicable. Again this step is a bit repetitive as you could likely go straight from the xml to .NFO files but I liked to use this as a check to make sure everything looks good. I would also recommend doing a trial run by editing this file and having only one movie in the list to test the next step. 
+This script will take the metadata.xml and export a .txt list of movies with their Title, Sort Title, Original Title, Added At Date, Last Viewed At Date, View Count, Collections and File Path as applicable. Again this step is a bit repetitive as you could likely go straight from the xml to .NFO files but I liked to use this as a check to make sure everything looks good. I would also recommend doing a trial run by editing this file and having only one movie in the list to test the next step. <ins>This does not work for TV Shows.</ins>
 
 Save the PlexXMLPull.py script to your C:\temp and run the following in CMD.
 
@@ -74,7 +74,7 @@ After this initial bulk "upload" I would suggest going into settings and selecti
 
 
 ## 4. Repeat For All Other Needed Libraries
-You will need to go back to the beginning and use the library ID for the other libraries you want. <ins>Again, this was never tested with TV Shows.</ins> You will then get a new metadata.xml file and run your python scripts again.
+You will need to go back to the beginning and use the library ID for the other libraries you want. <ins>Again, this does not work with TV Shows.</ins> You will then get a new metadata.xml file and run your python scripts again.
 
 # Troubleshooting
 I had some issues with accessing a network drive to store the files in. Running the below command in CMD helped figure out which drives were accessible or not and troubleshooting accordingly. I also found using regular CMD and not running it as ADMIN was best. YMMV
